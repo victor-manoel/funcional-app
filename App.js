@@ -3,14 +3,17 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { StyleSheet, Text, View } from 'react-native';
+import { useFonts, Raleway_900black} from '@expo-google-fonts/raleway';
 import firebase from './src/services/firebaseConnection';
 import Routes from './src/routes/index';
 
 export default function App() {
+
+
   return (
     <NavigationContainer style={styles.container}>
-     
-      <StatusBar backgroundColor='131313' barStyle='light-content' />
+      
+      <StatusBar backgroundColor='#131313' barStyle='light-content' />
       <Routes/>
 
     </NavigationContainer>
@@ -20,7 +23,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center',
   },
