@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { View, Text, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Background, Container, AreaInput, Input, SubmitButton, SubmitText, Link, LinkText } from './styles';
+import {AuthContext} from '../../contexts/auth';
 
 export default function SignIn() {
   const navigation = useNavigation();
@@ -36,7 +37,7 @@ export default function SignIn() {
           />
         </AreaInput>
 
-        <SubmitButton>
+        <SubmitButton onPress={handleLogin}>
           <SubmitText>Acessar</SubmitText>
         </SubmitButton>
 
