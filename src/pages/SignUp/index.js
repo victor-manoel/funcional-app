@@ -35,11 +35,11 @@ export default function SignIn() {
 
         <AreaInput>
           <Input
-          placeholder='Senha'
+          placeholder='Email'
           autoCorrect={false}
           autoCapitalize='none'
-          value={password}
-          onChangeText={(text) => setPassword(text)}
+          value={email}
+          onChangeText={(text) => setEmail(text)}
           />
         </AreaInput>
 
