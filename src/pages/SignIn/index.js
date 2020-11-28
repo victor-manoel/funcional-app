@@ -21,7 +21,7 @@ export default function SignIn() {
       behavior={Platform.Os === 'ios' ? 'padding' : ''}
       enabled
       >
-        <Text style={{ fontSize:35, alignItems: 'center', justifyContent: 'center', color: '#FFF', marginBottom: 20}}>Studio Trainer</Text>
+        <Text style={{ fontSize:35, alignItems: 'center', justifyContent: 'center', color: '#FFF', marginBottom: 20, fontStyle: 'italic'}}>Studio Trainer</Text>
         <AreaInput>
           <Input
           placeholder='Email'

@@ -23,14 +23,14 @@ export default function Home() {
     <Background>
       <Header/>
       <Container>
-        <Nome>Victor</Nome>
+        <Nome>{user && user.nome}</Nome>
         <Saldo>R$ 123,00</Saldo>
       </Container>
 
       <Title>Ultimos cadastros</Title>
 
       <List 
-      showVerticalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
       data={historico}
       keyExtractor={item => item.key}
       renderItem={({item}) => (<HistoricoList data={item}/>)}

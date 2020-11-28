@@ -8,9 +8,21 @@ export const Container = styled.View`
     margin-bottom: 15px;
     width: 100%;
     height: 50px;
+    flex-direction: row;
+`;
+
+export const NovoText = styled.Text`
+    color: #FFF;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    font-style: italic;
+    margin-left: 60px;
 `;
 
 export const ButtonMenu = styled.TouchableWithoutFeedback`
     justify-content: center;
     align-items: center;
+    justify-content: center;
+    
 `;
