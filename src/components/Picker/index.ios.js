@@ -8,7 +8,7 @@ export default function Picker({ onChange, tipo }){
             style={{
                 width:'100%'
             }}
-            selectedValue={tipo}
+            selectedValue={plano}
             onValueChange={ (valor) => onChange(valor) }
             >
               <RNPickerSelect.Item label="Receita" value="receita" />  
