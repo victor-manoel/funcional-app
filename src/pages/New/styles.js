@@ -27,3 +27,30 @@ font-size: 21px;
 font-weight: bold;
 color: #FFF;
 `;
+
+export const UploadButton = styled.TouchableOpacity`
+margin-top: 5%;
+background-color: #fff;
+width: 120px;
+height: 120px;
+border-radius: 90px;
+justify-content: center;
+align-items: center;
+z-index: 5;
+`;
+
+export const UploadText = styled.Text`
+z-index: 9;
+position: absolute;
+font-size: 55px;
+color: #e52246;
+opacity: 0.4;
+`;
+
+export const Avatar = styled.Image`
+width: 88px;
+height: 88px;
+border-radius: 20px;
+background-color: gray;
+`;
+

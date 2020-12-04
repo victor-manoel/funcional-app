@@ -10,7 +10,7 @@ export default function Picker({ onChange, plano }){
                 width:'100%'
             }}
             selectedValue={plano}
-            onValueChange={ (valor) => onChange(valor) }
+            onValueChange={ (plano) => onChange(plano) }
             >
               <RNPickerSelect.Item label="1 mes" value="um" />  
               <RNPickerSelect.Item label="2 meses" value="dois" />  

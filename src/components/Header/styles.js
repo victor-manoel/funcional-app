@@ -7,7 +7,7 @@ export const Container = styled.View`
     margin-left: 15px;
     margin-bottom: 15px;
     width: 100%;
-    height: 50px;
+    height: 45px;
     flex-direction: row;
 `;
 
@@ -17,7 +17,7 @@ export const NovoText = styled.Text`
     justify-content: center;
     font-size: 23px;
     font-style: italic;
-    margin-left: 60px;
+    margin-left: 65px;
 `;
 
 export const ButtonMenu = styled.TouchableWithoutFeedback`

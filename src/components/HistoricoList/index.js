@@ -9,7 +9,7 @@ export default function HistoricoList({data}){
             <Avatar/>
             <Tipo>
                 <TipoText>
-                    {data.tipo}
+                   {data.plano} 
                 </TipoText>
             </Tipo>
             <NomeText>
