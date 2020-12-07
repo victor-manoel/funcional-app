@@ -1,46 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { SafeAreaView, Keyboard, TouchableWithoutFeedback, Alert} from 'react-native';
 import {format} from 'date-fns';
+import { useNavigation } from '@react-navigation/native';
 import firebase from '../../services/firebaseConnection';
+import {AuthContext} from '../../contexts/auth';
 
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
-import * as ImagePicker from 'expo-image-picker';
-import Axios from "axios";
 
 import Header from '../../components/Header';
 import { Background, Input, SubmitButton, SubmitText, UploadButton, UploadText, Avatar} from './styles';
 import Picker from '../../components/Picker';
 
 export default function New() {
+ const navigation = useNavigation();
  const [nome, setNome] = useState('');
  const [endereco, setEndereco] = useState('');
  const [valor, setValor] = useState('');
  const [plano, setPlano] = useState('null');
- const [avatar, setAvatar] = useState();
- const [capturedPhoto, setCapturedPhoto] = useState(null);
- const [url, setUrl] = useState();
+ const [obs, setObs] = useState('');
 
- async function imagePickerCall(){
-   if(Constants.platform.ios){
-     const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    if(status !== 'granted'){
-      alert('Precisamos dessa permissão');
-      return;
-    }
-   }
-
-   const data = await ImagePicker.launchCameraAsync({mediaTypes: ImagePicker.MediaTypeOptions.Images});
-
-   if(data.cancelled){
-     return;
-   }
-   if(!data.uri){
-    return;
-  }
-   setCapturedPhoto(data.uri);
-   console.log(data);
- }
+ const {user:usuario} = useContext(AuthContext);
 
 
  function handleSubmit(){
@@ -68,8 +48,27 @@ export default function New() {
      endereco: endereco,
      valor: parseFloat(valor),
      plano: plano,
+     obs: obs,
      date: format(new Date(), 'dd/MM/yy')
    })
+
+   //atualizar saldo
+   let user = firebase.database().ref('users').child(uid);
+   await user.once('value').then((snapshot)=>{
+     let saldo = parseFloat(snapshot.val().saldo);
+
+     saldo += parseFloat(valor);
+
+     user.child('saldo').set(saldo);
+   });
+   Keyboard.dismiss();
+   setNome('');
+   setEndereco('');
+   setValor('');
+   setPlano('null');
+   setObs('');
+   navigation.navigate('Home');
+   
   }
 
  return (
@@ -102,25 +101,16 @@ export default function New() {
          value={valor}
          onChangeText={ (text) => setValor(text) }
          />
+
+         <Input
+         placeholder="Observação"
+         returnKeyType="next"
+         onSubmitEditing={ () => Keyboard.dismiss() }
+         value={obs}
+         onChangeText={ (text) => setObs(text) }
+         />
          
          <Picker onChange={setPlano} plano={plano} />
-
-         {
-            url ?
-            (
-              <UploadButton onPress={ imagePickerCall }>
-                <UploadText>+</UploadText>
-                <Avatar
-                source={{ uri: capturedPhoto }}
-                />
-              </UploadButton>
-            ) : 
-            (
-              <UploadButton onPress={ imagePickerCall }>
-                <UploadText>+</UploadText>
-              </UploadButton>   
-            )
-          }  
 
         <SubmitButton onPress={handleSubmit}>
           <SubmitText>Cadastrar</SubmitText>

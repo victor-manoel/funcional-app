@@ -3,20 +3,12 @@ import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
     background-color: #FFF;
+    width: 344px;
+    height: 110px;
     margin-bottom: 15px;
     border-radius: 20px;
     padding: 8px;
     flex-direction: row;
-`;
-
-export const Avatar = styled.Image`
-    margin-top: 1%;
-    background-color: gray;
-    width: 88px;
-    height: 88px;
-    border-radius: 90px;
-    justify-content: center;
-    z-index: 5;
 `;
 
 export const Tipo = styled.View`

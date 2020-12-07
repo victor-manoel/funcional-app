@@ -6,7 +6,6 @@ import {Avatar, Container, Tipo, TipoText, NomeText} from './styles';
 export default function HistoricoList({data}){
     return(
         <Container>
-            <Avatar/>
             <Tipo>
                 <TipoText>
                    {data.plano} 
