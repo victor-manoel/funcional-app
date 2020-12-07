@@ -13,7 +13,6 @@ export const Container = styled.View`
 export const Nome = styled.Text`
     font-size: 19px;
     color: #FFF;
-    font-style: italic;
 `;
 
 export const Saldo = styled.Text`
