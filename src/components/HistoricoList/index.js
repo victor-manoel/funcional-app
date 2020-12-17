@@ -1,14 +1,14 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableWithoutFeedback} from 'react-native';
 
 import {Container, Plano, PlanoText, NomeText, Valor, ValorText, Obs, ObsText} from './styles';
 
-export default function HistoricoList({data}){
+export default function HistoricoList({data, deleteItem}){
     return(
+        <TouchableWithoutFeedback onLongPress={()=>deleteItem(data)}>
         <Container>
-            
             <NomeText>
-                {data.nome}
+                {data.nome} - {data.date}
             </NomeText>
             <Plano>
                 <PlanoText>
@@ -23,5 +23,6 @@ export default function HistoricoList({data}){
             </ObsText>
             
         </Container>
+        </TouchableWithoutFeedback>
     );
 }

@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View, Text, Button} from 'react-native';
+import { View, Text, Button, Alert, TouchableOpacity} from 'react-native';
 import { format } from 'date-fns';
 import firebase from '../../services/firebaseConnection';
 import { AuthContext } from '../../contexts/auth';
 import Header from '../../components/Header';
 import HistoricoList from '../../components/HistoricoList';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Background, Container, Nome, Saldo, Title, List} from './styles';
+import { Background, Container, Nome, Saldo, Title, List, Area} from './styles';
 
 export default function Home() {
 
@@ -17,6 +18,8 @@ export default function Home() {
   const { user } = useContext(AuthContext);
   const uid = user && user.uid;
 
+  const [newDate, setNewDate] = useState(new Date());
+
   useEffect(()=>{
     async function loadList(){
       await firebase.database().ref('users').child(uid).on('value', (snapshot)=>{
@@ -25,7 +28,7 @@ export default function Home() {
 
       await firebase.database().ref('historico')
       .child(uid)
-      .orderByChild('date').equalTo(format(new Date, 'dd/MM/yy'))
+      .orderByChild('date')
       .limitToLast(1000).on('value', (snapshot)=>{
         setHistorico([]);
 
@@ -36,6 +39,7 @@ export default function Home() {
             plano: childItem.val().plano,
             valor: childItem.val().valor,
             obs: childItem.val().obs,
+            date: childItem.val().date,
           };
           
           setHistorico(oldArray => [...oldArray, list].reverse());
@@ -47,6 +51,26 @@ export default function Home() {
     loadList();
   }, []);
 
+  function handleDelete(data){
+    Alert.alert(
+      'Atenção!',
+      `Voce deseja excluir ${data.nome} ?`,
+      [{
+        text: 'Cancelar',
+        style: 'cancel'
+      },
+    {
+      text: 'Continuar',
+      onPress: () => handleDeleteSuccess(data)
+    }]
+    )
+  }
+
+  async function handleDeleteSuccess(data){
+    await firebase.database().ref('historico')
+    .child(uid).child(data.key).remove()
+  }
+
  return (
     <Background>
       <Header/>
@@ -55,13 +79,17 @@ export default function Home() {
         <Saldo>R$ {saldo.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}</Saldo>
       </Container>
 
+      <Area>
+      <TouchableOpacity>
+        <Icon name="event" color="#FFF" size={30}/>
+      </TouchableOpacity>
       <Title>Ultimos cadastros</Title>
-
+      </Area>
       <List 
       showsVerticalScrollIndicator={false}
       data={historico}
       keyExtractor={item => item.key}
-      renderItem={({item}) => (<HistoricoList data={item}/>)}
+      renderItem={({item}) => (<HistoricoList data={item} deleteItem={handleDelete}/>)}
       />
     </Background>
   );

@@ -49,7 +49,7 @@ export default function New() {
      valor: parseFloat(valor),
      plano: plano,
      obs: obs,
-     date: format(new Date(), 'dd/MM/yy')
+     date: format(new Date(), 'dd/MM/yyyy')
    })
 
    //atualizar saldo

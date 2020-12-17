@@ -1,67 +1,57 @@
 import React, {useState, useContext} from 'react';
-import { Platform, ActivityIndicator } from 'react-native';
+import { View, Text, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { AuthContext } from '../../contexts/auth';
-
-import { Background, Container, Logo, AreaInput, Input, SubmitButton, 
-SubmitText, Link, LinkText} from './styles';
+import { Background, Container, AreaInput, Input, SubmitButton, SubmitText, Link, LinkText } from './styles';
+import {AuthContext} from '../../contexts/auth';
 
 export default function SignIn() {
   const navigation = useNavigation();
 
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signIn, loadingAuth } = useContext(AuthContext);
-
+  const {signIn} = useContext(AuthContext);
 
   function handleLogin(){
-    signIn(email, password);
+    signIn(email,password);
   }
 
  return (
-   <Background>
+    <Background>
       <Container
-      behavior={Platform.OS === 'ios' ? 'padding' : ''}
+      behavior={Platform.Os === 'ios' ? 'padding' : ''}
       enabled
       >
-         <Text style={{ fontSize:35, alignItems: 'center', justifyContent: 'center', color: '#FFF', marginBottom: 20, fontStyle: 'italic'}}>Studio Trainer</Text>
-        
+        <Text style={{ fontSize:35, alignItems: 'center', justifyContent: 'center', color: '#FFF', marginBottom: 20, fontStyle: 'italic'}}>Studio Trainer</Text>
         <AreaInput>
           <Input
-          placeholder="Email"
+          placeholder='Email'
           autoCorrect={false}
           autoCapitalize="none"
           value={email}
-          onChangeText={ (text) => setEmail(text) }
+          onChangeText={(text) => setEmail(text)}
           />
         </AreaInput>
 
         <AreaInput>
           <Input
-          placeholder="Senha"
+          placeholder='Senha'
           autoCorrect={false}
-          autoCapitalize="none"
+          autoCapitalize='none'
           value={password}
-          onChangeText={ (text) => setPassword(text) }
+          onChangeText={(text) => setPassword(text)}
+          secureTextEntry={true}
           />
         </AreaInput>
 
-      <SubmitButton onPress={handleLogin}>
-        {
-          loadingAuth ? (
-            <ActivityIndicator size={20} color="#FFF" />
-          ) : (
-            <SubmitText>Acessar</SubmitText>
-          )
-        }
-      </SubmitButton>
+        <SubmitButton onPress={handleLogin}>
+          <SubmitText>Acessar</SubmitText>
+        </SubmitButton>
 
-      <Link onPress={ () => navigation.navigate('SignUp')}>
-        <LinkText>Criar uma conta!</LinkText>
-      </Link>
+        <Link onPress={() => navigation.navigate('SignUp')}>
+          <LinkText>Criar sua conta</LinkText>
+        </Link>
 
       </Container>
-   </Background>
+    </Background>
   );
 }
