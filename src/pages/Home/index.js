@@ -69,6 +69,9 @@ export default function Home() {
   async function handleDeleteSuccess(data){
     await firebase.database().ref('historico')
     .child(uid).child(data.key).remove()
+    .catch((error)=>{
+      console.log(error);
+    })
   }
 
  return (
@@ -89,7 +92,7 @@ export default function Home() {
       showsVerticalScrollIndicator={false}
       data={historico}
       keyExtractor={item => item.key}
-      renderItem={({item}) => (<HistoricoList data={item} deleteItem={handleDelete}/>)}
+      renderItem={({item}) => (<HistoricoList data={item} removeItem={handleDelete}/>)}
       />
     </Background>
   );

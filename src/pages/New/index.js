@@ -17,7 +17,7 @@ export default function New() {
  const [nome, setNome] = useState('');
  const [endereco, setEndereco] = useState('');
  const [valor, setValor] = useState('');
- const [plano, setPlano] = useState('null');
+ const [plano, setPlano] = useState('');
  const [obs, setObs] = useState('');
 
  const {user:usuario} = useContext(AuthContext);
