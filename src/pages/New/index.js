@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { SafeAreaView, Keyboard, TouchableWithoutFeedback, Alert} from 'react-native';
+import { SafeAreaView, Keyboard, TouchableWithoutFeedback, Alert, Button} from 'react-native';
 import {format} from 'date-fns';
 import { useNavigation } from '@react-navigation/native';
 import firebase from '../../services/firebaseConnection';
 import {AuthContext} from '../../contexts/auth';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
@@ -13,12 +14,31 @@ import { Background, Input, SubmitButton, SubmitText, UploadButton, UploadText, 
 import Picker from '../../components/Picker';
 
 export default function New() {
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
  const navigation = useNavigation();
  const [nome, setNome] = useState('');
  const [endereco, setEndereco] = useState('');
  const [valor, setValor] = useState('');
  const [plano, setPlano] = useState('');
  const [obs, setObs] = useState('');
+
+ const onChange = (event, selectedDate) => {
+  const currentDate = selectedDate || date;
+  setShow(Platform.OS === 'ios');
+  setDate(currentDate);
+};
+const showMode = (currentMode) => {
+  setShow(true);
+  setMode(currentMode);
+};
+
+const showDatepicker = () => {
+  showMode('date');
+};
+
 
  const {user:usuario} = useContext(AuthContext);
 
@@ -111,6 +131,23 @@ export default function New() {
          />
          
          <Picker onChange={setPlano} plano={plano} />
+
+        
+     
+        <Button onPress={showDatepicker} title="Data de Vencimento" />
+      
+      
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={datevenc}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      )}
+   
 
         <SubmitButton onPress={handleSubmit}>
           <SubmitText>Cadastrar</SubmitText>
