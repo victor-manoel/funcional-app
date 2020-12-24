@@ -29,7 +29,7 @@ export default function Home() {
       await firebase.database().ref('historico')
       .child(uid)
       .orderByChild('date')
-      .limitToLast(1000).on('value', (snapshot)=>{
+      .limitToLast(2000).on('value', (snapshot)=>{
         setHistorico([]);
 
         snapshot.forEach((childItem) => {

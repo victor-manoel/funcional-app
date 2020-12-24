@@ -85,7 +85,7 @@ const showDatepicker = () => {
    setNome('');
    setEndereco('');
    setValor('');
-   setPlano('null');
+   setPlano('');
    setObs('');
    navigation.navigate('Home');
    
@@ -140,10 +140,11 @@ const showDatepicker = () => {
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={datevenc}
-          mode={mode}
+          value={date}
+          mode={date}
           is24Hour={true}
           display="default"
+          minimumDate = {new Date(2021, 0, 1)}
           onChange={onChange}
         />
       )}
