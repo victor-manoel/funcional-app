@@ -9,7 +9,7 @@ export default function HistoricoList({data, removeItem}){
         <TouchableOpacity onLongPress={ ()=> removeItem(data)}>
         <Container>
             <NomeText>
-                {data.nome} - {data.date}
+                {data.nome} 
             </NomeText>
             <Plano>
                 <PlanoText>

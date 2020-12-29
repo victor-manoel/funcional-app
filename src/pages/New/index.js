@@ -14,7 +14,7 @@ import { Background, Input, SubmitButton, SubmitText, UploadButton, UploadText, 
 import Picker from '../../components/Picker';
 
 export default function New() {
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
@@ -47,7 +47,7 @@ const showDatepicker = () => {
    
    Alert.alert(
      'Confirmando dados',
-     `Nome: ${nome} / Plano: ${plano} meses / Valor: ${parseFloat(valor)} reais`,
+     `Nome: ${nome} / Plano: ${plano} meses / Valor: ${parseFloat(valor)} reais / Data: ${date}` ,
      [{
        text: 'Cancelar',
        style: 'cancel'
@@ -69,7 +69,7 @@ const showDatepicker = () => {
      valor: parseFloat(valor),
      plano: plano,
      obs: obs,
-     date: format(new Date(), 'dd/MM/yyyy')
+     date: format(new Date(), 'dd/MM/yyyy'),
    })
 
    //atualizar saldo

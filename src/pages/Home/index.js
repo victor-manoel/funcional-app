@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 import HistoricoList from '../../components/HistoricoList';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+
 import { Background, Container, Nome, Saldo, Title, List, Area} from './styles';
 
 export default function Home() {
