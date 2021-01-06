@@ -140,7 +140,7 @@ const showDatepicker = () => {
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={date}
+          value={ new Date()}
           mode={date}
           is24Hour={true}
           display="default"
