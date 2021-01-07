@@ -75,12 +75,42 @@ export default function Home() {
     })
   }
 
+  function zerarSaldo(){
+    Alert.alert(
+      'Atenção!',
+      `Voce deseja zerar o saldo de ${saldo} reais ?`,
+      [{
+        text: 'Cancelar',
+        style: 'cancel'
+      },
+    {
+      text: 'Continuar',
+      onPress: () => zeroSuccess()
+    }]
+    )
+  }
+
+  async function zeroSuccess(){
+    let user = firebase.database().ref('users').child(uid)
+    await user.once('value').then((snapshot)=>{
+      let saldo = parseFloat(snapshot.val().saldo);
+ 
+      saldo = 0;
+ 
+      user.child('saldo').set(saldo);
+
+  });
+}
+
+
  return (
     <Background>
       <Header/>
       <Container>
         <Nome>{user && user.nome}</Nome>
+        <TouchableOpacity onPress={()=> zerarSaldo()}>
         <Saldo>R$ {saldo.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}</Saldo>
+        </TouchableOpacity>
       </Container>
 
       <Area>
