@@ -7,11 +7,12 @@ background-color: #131313;
 export const Input = styled.TextInput.attrs({
     placeholderTextColor: '#222'
 })`
-height: 50px;
+height: 55px;
 width: 90%;
 background-color: rgba(255,255,255, 0.9);
-margin-top: 30px;
+margin-top: 15px;
 font-size: 17px;
+border-radius: 5px;
 `;
 
 export const SubmitButton = styled.TouchableOpacity`

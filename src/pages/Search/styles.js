@@ -25,5 +25,5 @@ color: #121212;
 `;
 
 export const List = styled.FlatList`
-
+flex: 1;
 `;
