@@ -20,7 +20,7 @@ export default function Search(){
             return;
         }
         
-        let subscriber = firebase.database().ref('historico').child(uid).child(key)
+        let subscriber = firebase.database().ref('historico').child('nome').child(key)
         .where('nome', '>=', input)
         .where('nome', '<=', input + "\uf8ff")
         .onSnapshot(snapshot =>{
