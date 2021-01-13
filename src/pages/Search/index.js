@@ -20,27 +20,23 @@ export default function Search(){
             return;
         }
         
-        let subscriber = firebase.database().ref('historico').child('nome').child(key)
-        .where('nome', '>=', input)
-        .where('nome', '<=', input + "\uf8ff")
-        .onSnapshot(snapshot =>{
+        let subscriber = firebase.database().ref('historico')
+        subscriber.orderByValue()
+        .on("value", function(snapshot) {
             const listsUsers = [];
 
-            snapshot.forEach(doc =>{
-                listsUsers.push({
-                    ...doc.data(),
-                    id: doc.id
-                });
+            snapshot.forEach( doc => {
+              listsUsers.push({
+               id: doc.id 
             });
-
-            setUsers(listsUsers);
-            console.log(listsUsers);
-        })
-
-        return () => subscriber();
-        
+        });
+        setUsers(listsUsers);
+        console.log(listsUsers);
+    })
+    return () => subscriber();
 
     }, [input]);
+
     
     return(
         <Container>
