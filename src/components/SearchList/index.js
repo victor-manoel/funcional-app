@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { Container } from './styles';
+import { Container, Name } from './styles';
 
-export default function SearchList() {
+export default function SearchList({data}) {
  return (
-   <Container>
-       <Text>Usuario 1</Text>
+   <Container onPress={() => alert('clicou')}>
+     <Name>{data.nome}</Name>
    </Container>
   );
 }

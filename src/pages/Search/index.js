@@ -20,7 +20,7 @@ export default function Search(){
             return;
         }
         
-        let subscriber = firebase.database().ref('historico')
+        let subscriber = firebase.database().ref('historico').child(uid)
         subscriber.orderByValue()
         .on("value", function(snapshot) {
             const listsUsers = [];
@@ -33,7 +33,6 @@ export default function Search(){
         setUsers(listsUsers);
         console.log(listsUsers);
     })
-    return () => subscriber();
 
     }, [input]);
 
