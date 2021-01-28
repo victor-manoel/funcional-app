@@ -5,7 +5,7 @@ import { Container, Name } from './styles';
 export default function SearchList({data}) {
  return (
    <Container onPress={() => alert('clicou')}>
-     <Name>{data.nome}</Name>
+     <Name> {data.nome}</Name>
    </Container>
   );
 }

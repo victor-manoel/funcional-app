@@ -13,21 +13,21 @@ export default function Search(){
 
      useEffect(()=>{
         let uid = usuario.uid;
-        let key = usuario.key;
-        
+                
         if(input ==='' || input === undefined){
             setUsers([]);
             return;
         }
         
-        let subscriber = firebase.database().ref('historico').child(uid)
-        subscriber.orderByValue()
+        let subscriber = firebase.database().ref('historico').child(uid).child(uid)
+        .orderByChild("nome")
+        .limitToFirst(5)
         .on("value", function(snapshot) {
             const listsUsers = [];
 
             snapshot.forEach( doc => {
               listsUsers.push({
-               id: doc.id 
+               id: doc.id                                       
             });
         });
         setUsers(listsUsers);
