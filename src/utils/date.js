@@ -1,2 +1,2 @@
-export const stringToReverseDate = (stringfiedDate) =>
-  stringfiedDate.split("/").reverse().join("/");
+export const stringToReverseDate = (stringifiedDate) =>
+  stringifiedDate && stringifiedDate.split("/").reverse().join("/");
