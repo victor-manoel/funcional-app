@@ -40,7 +40,7 @@ const Vencimentos = () => {
             // Retorna os vencimentos com data menor ou igual a hoje
             .filter(
               (vencimento) =>
-                stringToReverseDate(vencimento.dataVencimento) <= today
+                stringToReverseDate(vencimento.dataVencimento) < today
             );
 
           const vencimentosWithKey = vencimentos.map((vencimento, index) => ({
