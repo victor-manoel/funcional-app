@@ -63,7 +63,11 @@ const Vencimentos = () => {
       <Container>
         <HistoricoList>
           {vencimentos?.map((vencimento) => (
-            <HistoricoItem key={vencimento.key} data={vencimento} />
+            <HistoricoItem
+              key={vencimento.key}
+              data={vencimento}
+              removeItem={() => console.log("TO REMOVE")}
+            />
           ))}
           {!vencimentos.length && (
             <Text style={{ color: "white" }}>
