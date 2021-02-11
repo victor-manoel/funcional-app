@@ -1,19 +1,27 @@
-import React from 'react';
-import Icon from 'react-native-vector-icons/Feather';
-import { useNavigation } from '@react-navigation/native';
-import {View, Text} from 'react-native';
+import React from "react";
 
-import {Container, ButtonMenu, NovoText} from './styles';
+import Feather from "react-native-vector-icons/Feather";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
-export default function Header() {
- const navigation = useNavigation();
+import { useNavigation } from "@react-navigation/native";
 
- return (
-   <Container>
-       <ButtonMenu onPress={ () => navigation.toggleDrawer() }>
-         <Icon name="menu" color="#FFF" size={30} />
-       </ButtonMenu>
-       <NovoText>Studio Trainer</NovoText>
-   </Container>
+import { Container, ButtonMenu, NovoText } from "./styles";
+
+export default function Header({ secondary }) {
+  const navigation = useNavigation();
+
+  return (
+    <Container>
+      <ButtonMenu
+        onPress={() => navigation[secondary ? "goBack" : "toggleDrawer"]()}
+      >
+        {secondary ? (
+          <AntDesign name="back" color="#FFF" size={30}></AntDesign>
+        ) : (
+          <Feather name="menu" color="#FFF" size={30} />
+        )}
+      </ButtonMenu>
+      <NovoText>Studio Trainer</NovoText>
+    </Container>
   );
 }
