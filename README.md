@@ -6,6 +6,7 @@
 ## Services Used
  
 * Github
+* React Native
 * VScode
 * Expo
 * Git
